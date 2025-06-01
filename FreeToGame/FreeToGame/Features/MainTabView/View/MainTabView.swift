@@ -19,6 +19,12 @@ struct MainTabView: View {
             Image(systemName: "gamecontroller.fill")
             Text("Games")
           }
+        
+        ListGenreView(viewModel: ListGenreViewModel())
+          .tabItem {
+            Image(systemName: "square.and.arrow.up.on.square")
+            Text("Genres")
+          }
       }
       .tint(.white)
       .preferredColorScheme(.dark)
