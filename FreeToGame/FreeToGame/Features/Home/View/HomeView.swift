@@ -1,0 +1,46 @@
+//
+//  HomeView.swift
+//  FreeToGame
+//
+//  Created by Yan Cervantes on 01/12/24.
+//
+
+import SwiftUI
+
+struct HomeView: View {
+  
+  @State var viewModel: HomeViewModel
+  
+  var body: some View {
+    ContentView(loaderState: viewModel.loaderState) {
+      ScrollView {
+        LazyVStack(alignment: .leading) {
+          ForEach(viewModel.categoryGames, id: \.title) { category in
+            Text(category.title)
+              .font(.system(size: 26, weight: .bold))
+              .foregroundColor(.secondary)
+              .padding(10)
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+              LazyHStack(spacing: 12) {
+                ForEach(category.games, id: \.self) { game in
+                  GameCardView(game: game)
+                }
+              }
+              .padding(.horizontal)
+            }
+          }
+        }
+      }
+      .task {
+        await viewModel.fetchGames()
+      }
+    }
+  }
+}
+
+#Preview {
+  NavigationStack {
+    HomeView(viewModel: HomeViewModel())
+  }.preferredColorScheme(.dark)
+}

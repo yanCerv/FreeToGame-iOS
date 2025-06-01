@@ -1,0 +1,28 @@
+{
+  "configurations" : [
+    {
+      "id" : "C0AD0D4A-9166-43E9-8739-DD9CBD4D1407",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:FreeToGame.xcodeproj",
+      "identifier" : "7CF51C122CFA042F0001FC34",
+      "name" : "FreeToGame"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:FreeToGame.xcodeproj",
+        "identifier" : "7CF51C232CFA04300001FC34",
+        "name" : "FreeToGameTests"
+      }
+    }
+  ],
+  "version" : 1
+}
