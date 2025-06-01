@@ -23,7 +23,10 @@ protocol EndPoint {
 
 extension EndPoint {
   
-  @MainActor
+  private var environment: Environment {
+    return Environment()
+  }
+  
   private var headers: [String: String] {
     return Headers.values()
   }
@@ -39,14 +42,12 @@ extension EndPoint {
     return nil
   }
   
-  @MainActor
   private var baseUrl: URL {
-    let stringBaseUrl = Environment.shared.get(.baseUrl)
+    let stringBaseUrl = environment.get(.baseUrl)
     let stringUrl = "\(stringBaseUrl)\(path)"
     return URL(string: stringUrl)!
   }
   
-  @MainActor
   var request: URLRequest {
     var request = URLRequest(url: baseUrl)
     request.allHTTPHeaderFields = headers

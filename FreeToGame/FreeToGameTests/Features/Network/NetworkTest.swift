@@ -18,6 +18,7 @@ final class NetworkTest: XCTestCase {
   var message: String = ""
   var statusCode: Int = 0
   
+  @MainActor
   override func setUpWithError() throws {
     homeClient = HomeClient()
   }

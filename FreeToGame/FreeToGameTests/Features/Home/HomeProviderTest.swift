@@ -8,7 +8,7 @@
 import Foundation
 @testable import FreeToGame
 
-actor HomeProviderTest: HomeClientProvider {
+final class HomeProviderTest: HomeClientProvider {
   private var responseType: ResponseTypeTest
   private var errorHandler: ErrorHandler = .connection
   

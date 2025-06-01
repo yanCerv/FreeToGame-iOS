@@ -7,30 +7,21 @@
 
 import SwiftUI
 
-actor Environment {
-  
-  @MainActor
-  static let shared: Environment = Environment()
-  
-  @MainActor
+final class Environment {
+    
   public private(set) var fileConfig: String!
-  @MainActor
   public private(set) var fileContent: NSDictionary!
-  @MainActor
   public private(set) var environmentType: EnvironmentType!
-  @MainActor
   public private(set) var attributes: [String: String] = [:]
   
   //MARK: Init
   
-  @MainActor
   init() {
     setupEnvironment()
   }
   
   //MARK: Methods
   
-  @MainActor
   func get(_ value: EnvironmentValue) -> String {
     if let value = attributes[value.rawValue] {
       return value
@@ -40,7 +31,6 @@ actor Environment {
   
   //MARK: Private Methods
   
-  @MainActor
   private func setupEnvironment() {
     let env = getKeyEnv()
     environmentType = env
@@ -53,7 +43,6 @@ actor Environment {
   
   // MARK: Private Methods
   
-  @MainActor
   private func getKeyEnv() -> EnvironmentType {
      #if Store
     debugPrint("Environment PRODUCTION")

@@ -7,11 +7,13 @@
 
 import Combine
 
+@MainActor
 protocol HomeClientProvider {
   func fetchDataGames() async throws -> [Game]
 }
 
-actor HomeClient: Request, HomeClientProvider, AssistErrorMessage {
+@MainActor
+final class HomeClient: Request, HomeClientProvider, AssistErrorMessage {
   
   private var anyCancellables: Set<AnyCancellable> = []
   
@@ -26,26 +28,24 @@ actor HomeClient: Request, HomeClientProvider, AssistErrorMessage {
       return await mockGames()
     } else {
       return try await withCheckedThrowingContinuation { continuation in
-        Task {
-          await gameServices().sink { completion in
-            if let error = self.error(completion) {
-              continuation.resume(throwing: error)
-            }
-          } receiveValue: { data in
-            if data.isEmpty {
-              continuation.resume(throwing: ErrorHandler.error(message: "No Games Found", statusCode: 1))
-            } else {
-              continuation.resume(returning: data)
-            }
-          }.store(in: &anyCancellables)
-        }
+        gameServices().sink { completion in
+          if let error = self.error(completion) {
+            continuation.resume(throwing: error)
+          }
+        } receiveValue: { data in
+          if data.isEmpty {
+            continuation.resume(throwing: ErrorHandler.error(message: "No Games Found", statusCode: 1))
+          } else {
+            continuation.resume(returning: data)
+          }
+        }.store(in: &anyCancellables)
       }
     }
   }
   
-  private func gameServices() async -> AnyPublisher<[Game], ErrorHandler> {
+  private func gameServices() -> AnyPublisher<[Game], ErrorHandler> {
     let config = HomeClientResources.getGames.config
-    return await request(config)
+    return  request(config)
   }
   
   //MARK: Mock Data

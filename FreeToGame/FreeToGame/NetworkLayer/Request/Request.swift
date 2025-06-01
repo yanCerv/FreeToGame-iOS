@@ -11,7 +11,7 @@ import Combine
 typealias PublisherResult<T: Decodable> = AnyPublisher<T, ErrorHandler>
 
 protocol Request {
-  func request<T: Decodable>(_ configuration: RequestConfiguration) async -> PublisherResult<T>
+  func request<T: Decodable>(_ configuration: RequestConfiguration) -> PublisherResult<T>
 }
 
 private struct RequestSessionHolder {
@@ -23,8 +23,8 @@ private struct RequestSessionHolder {
 
 extension Request {
   
-  func request<T: Decodable>(_ configuration: RequestConfiguration) async -> PublisherResult<T> {
-    let request = await configuration.request
+  func request<T: Decodable>(_ configuration: RequestConfiguration) -> PublisherResult<T> {
+    let request = configuration.request
     return RequestSessionHolder.shared.dataTaskPublisher(for: request)
       .receive(on: DispatchQueue.main)
       .tryMap { element -> Data in
