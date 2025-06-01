@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum NavigationPath: Hashable {
-  case profile
+  case search
   case description
 }
 

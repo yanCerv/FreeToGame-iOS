@@ -12,14 +12,19 @@ struct ListGenreView: View {
   @State var viewModel: ListGenreViewModel
   
   var body: some View {
-    ContentView(loaderState: viewModel.loaderState) {
-      VStack {
-        Text("ListGenreView")
-        
-      }
-      .task {
-        await viewModel.fetchGames()
+    ScrollView {
+      LazyVStack {
+        ForEach(viewModel.genres, id: \.self) { genre in
+          GenreCardView(genre: genre)
+        }
       }
     }
+    .task {
+      await viewModel.fetchGames()
+    }
   }
+}
+
+#Preview {
+  ListGenreView(viewModel: ListGenreViewModel(HomeClient(.mock)))
 }

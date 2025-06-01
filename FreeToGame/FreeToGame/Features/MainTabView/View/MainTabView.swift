@@ -17,7 +17,7 @@ struct MainTabView: View {
         HomeView(viewModel: HomeViewModel())
           .tabItem {
             Image(systemName: "gamecontroller.fill")
-            Text("Games")
+            Text("Trending")
           }
         
         ListGenreView(viewModel: ListGenreViewModel())
@@ -29,8 +29,8 @@ struct MainTabView: View {
       .tint(.white)
       .preferredColorScheme(.dark)
       .toolbar {
-        NavigationButton(imageName: "person.fill") {
-          navigation.paths.append(.profile)
+        NavigationButton(imageName: "magnifyingglass") {
+          navigation.paths.append(.search)
         }
       }
       .navigationTitle("Free To Game")
@@ -38,8 +38,8 @@ struct MainTabView: View {
       .toolbarBackground(.visible, for: .navigationBar)
       .navigationDestination(for: NavigationPath.self) { path in
         switch path {
-        case .profile:
-          Text("profile view")
+        case .search:
+          Text("search view")
         case .description:
           Text("description view")
         }
