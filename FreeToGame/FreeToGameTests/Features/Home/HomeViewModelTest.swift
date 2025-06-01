@@ -31,7 +31,7 @@ final class HomeViewModelTest: XCTestCase {
     await viewModel.fetchGames()
 
     XCTAssertEqual(viewModel.loaderState, .finishLoading)
-    XCTAssertFalse(viewModel.games.isEmpty)
+    XCTAssertFalse(viewModel.categoryGames.isEmpty)
     XCTAssertTrue(viewModel.errorMessage.isEmpty)
     XCTAssertFalse(viewModel.showErrorAlert)
   }
@@ -45,7 +45,7 @@ final class HomeViewModelTest: XCTestCase {
     await viewModel.fetchGames()
     
     XCTAssertEqual(viewModel.loaderState, .finishLoading)
-    XCTAssertTrue(viewModel.games.isEmpty)
+    XCTAssertTrue(viewModel.categoryGames.isEmpty)
     XCTAssertFalse(viewModel.errorMessage.isEmpty)
     XCTAssertTrue(viewModel.showErrorAlert)
   }
@@ -59,7 +59,7 @@ final class HomeViewModelTest: XCTestCase {
     await viewModel.fetchGames()
 
     XCTAssertEqual(viewModel.loaderState, .finishLoading)
-    XCTAssertTrue(viewModel.games.isEmpty)
+    XCTAssertTrue(viewModel.categoryGames.isEmpty)
     XCTAssertFalse(viewModel.errorMessage.isEmpty)
     XCTAssertTrue(viewModel.showErrorAlert)
   }
@@ -73,7 +73,7 @@ final class HomeViewModelTest: XCTestCase {
     await viewModel.fetchGames()
     
     XCTAssertEqual(viewModel.loaderState, .finishLoading)
-    XCTAssertTrue(viewModel.games.isEmpty)
+    XCTAssertTrue(viewModel.categoryGames.isEmpty)
     XCTAssertFalse(viewModel.errorMessage.isEmpty)
     XCTAssertTrue(viewModel.showErrorAlert)
   }
@@ -87,7 +87,7 @@ final class HomeViewModelTest: XCTestCase {
     await viewModel.fetchGames()
         
     XCTAssertEqual(viewModel.loaderState, .finishLoading)
-    XCTAssertTrue(viewModel.games.isEmpty)
+    XCTAssertTrue(viewModel.categoryGames.isEmpty)
     XCTAssertFalse(viewModel.errorMessage.isEmpty)
     XCTAssertTrue(viewModel.showErrorAlert)
   }
