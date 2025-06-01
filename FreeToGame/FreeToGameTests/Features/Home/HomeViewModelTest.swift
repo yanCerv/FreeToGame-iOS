@@ -41,7 +41,7 @@ final class HomeViewModelTest: XCTestCase {
     XCTAssertNotNil(viewModel)
     XCTAssertNotNil(homeProvider)
     
-    await homeProvider.set(responseType: .failure, with: .requestFail)
+    homeProvider.set(responseType: .failure, with: .requestFail)
     await viewModel.fetchGames()
     
     XCTAssertEqual(viewModel.loaderState, .finishLoading)
@@ -55,7 +55,7 @@ final class HomeViewModelTest: XCTestCase {
     XCTAssertNotNil(viewModel)
     XCTAssertNotNil(homeProvider)
 
-    await homeProvider.set(responseType: .failure, with: .connection)
+    homeProvider.set(responseType: .failure, with: .connection)
     await viewModel.fetchGames()
 
     XCTAssertEqual(viewModel.loaderState, .finishLoading)
@@ -69,7 +69,7 @@ final class HomeViewModelTest: XCTestCase {
     XCTAssertNotNil(viewModel)
     XCTAssertNotNil(homeProvider)
 
-    await homeProvider.set(responseType: .failure, with: .jsonConversionFail(message: "test error json"))
+    homeProvider.set(responseType: .failure, with: .jsonConversionFail(message: "test error json"))
     await viewModel.fetchGames()
     
     XCTAssertEqual(viewModel.loaderState, .finishLoading)
@@ -83,7 +83,7 @@ final class HomeViewModelTest: XCTestCase {
     XCTAssertNotNil(viewModel)
     XCTAssertNotNil(homeProvider)
 
-    await homeProvider.set(responseType: .failure, with: .error(message: "test error content", statusCode: 1))
+    homeProvider.set(responseType: .failure, with: .error(message: "test error content", statusCode: 1))
     await viewModel.fetchGames()
         
     XCTAssertEqual(viewModel.loaderState, .finishLoading)

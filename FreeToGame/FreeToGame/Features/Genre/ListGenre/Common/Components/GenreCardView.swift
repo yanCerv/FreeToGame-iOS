@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct GenreCardView: View {
-  
+  @EnvironmentObject var navigation: NavigationManager
   var genre: String
   
   var body: some View {
     Button {
-      //TODO
+      navigation.add(.listSelecte(genre: genre))
     } label: {
       VStack {
         HStack {
@@ -37,4 +37,5 @@ struct GenreCardView: View {
 
 #Preview {
   GenreCardView(genre: "MMORPG")
+    .environmentObject(NavigationManager())
 }

@@ -1,19 +1,19 @@
 //
-//  HomeClient.swift
+//  ListGenreClient.swift
 //  FreeToGame
 //
-//  Created by Yan Cervantes on 29/11/24.
+//  Created by Yan Cervantes on 01/06/25.
 //
 
 import Combine
 
 @MainActor
-protocol HomeClientProvider {
-  func fetchDataGames() async throws -> [Game]
+protocol ListGenreProvider {
+  func fetchList(_ genre: String) async throws -> [Game]
 }
 
 @MainActor
-final class HomeClient: Request, HomeClientProvider, AssistErrorMessage {
+final class ListGenreClient: Request, ListGenreProvider, AssistErrorMessage {
   
   private var anyCancellables: Set<AnyCancellable> = []
   
@@ -27,29 +27,28 @@ final class HomeClient: Request, HomeClientProvider, AssistErrorMessage {
   
   //MARK: Methods
   
-  func fetchDataGames() async throws -> [Game] {
+  func fetchList(_ genre: String) async throws -> [Game] {
     if serviceType == .mock {
       return await mockGames()
     }
     
     return try await withCheckedThrowingContinuation { continuation in
-      gameServices().sink { completion in
+      gameServices(genre).sink { completion in
         if let error = self.error(completion) {
           continuation.resume(throwing: error)
         }
-      } receiveValue: { data in
-        if data.isEmpty {
+      } receiveValue: { response in
+        if response.isEmpty {
           continuation.resume(throwing: ErrorHandler.error(message: "No Games Found", statusCode: 1))
         } else {
-          continuation.resume(returning: data)
+          continuation.resume(returning: response)
         }
       }.store(in: &anyCancellables)
     }
-    
   }
   
-  private func gameServices() -> AnyPublisher<[Game], ErrorHandler> {
-    let config = HomeClientResources.getGames.config
+  private func gameServices(_ genre: String) -> AnyPublisher<[Game], ErrorHandler> {
+    let config = ListGenreResource.getgames(genre: genre).config
     return request(config)
   }
   
@@ -57,7 +56,7 @@ final class HomeClient: Request, HomeClientProvider, AssistErrorMessage {
   
   private func mockGames() async -> [Game] {
     do {
-      let response = try JsonResource.getFrom("GamesResponse", type: [Game].self)
+      let response = try JsonResource.getFrom("GenreListGamesMock", type: [Game].self)
       return response
     } catch {
       return []

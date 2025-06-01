@@ -23,6 +23,8 @@ final class ListGenreViewModel: ShowErrorProtocol {
     self.client = client
   }
   
+  //MARK: Methods
+  
   @MainActor
   func fetchGames() async {
     guard !isLoadedData else { return }
@@ -38,8 +40,11 @@ final class ListGenreViewModel: ShowErrorProtocol {
     isLoadedData = true
   }
   
+  //MARK: Private Methods
+  
   private func configListGenre(_ games: [Game]) -> [String] {
     let categories: Set<String> = Set(games.map { $0.genre.trimmingCharacters(in: .whitespacesAndNewlines) })
-    return Array(categories)
+    let sorted = Array(categories).sorted(by: { $0 < $1 })
+    return sorted
   }
 }

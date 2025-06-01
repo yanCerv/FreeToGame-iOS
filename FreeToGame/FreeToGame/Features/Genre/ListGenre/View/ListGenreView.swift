@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ListGenreView: View {
   
+  @EnvironmentObject var navigation: NavigationManager
+  
   @State var viewModel: ListGenreViewModel
   
   var body: some View {
@@ -27,4 +29,5 @@ struct ListGenreView: View {
 
 #Preview {
   ListGenreView(viewModel: ListGenreViewModel(HomeClient(.mock)))
+    .environmentObject(NavigationManager())
 }
