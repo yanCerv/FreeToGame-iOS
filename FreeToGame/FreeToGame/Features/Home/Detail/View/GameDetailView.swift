@@ -14,13 +14,15 @@ struct GameDetailView: View {
   var body: some View {
     VStack {
       NavigationButton(imageName: "xmark.circle.fill", action: {
-        viewModel.didTapCloseView()
+        withAnimation(.spring(response: 0.8, dampingFraction: 0.8)) {
+          viewModel.didTapCloseView()
+        }
       })
       .frame(maxWidth: .infinity, alignment: .trailing)
       .padding(.horizontal, 20)
       .padding(.top, 10)
       
-      AsyncImage(url: URL(string: viewModel.game.thumbnail)) { phase in
+      AsyncImage(url: viewModel.imageUrl) { phase in
         switch phase {
         case .success(let image):
           image

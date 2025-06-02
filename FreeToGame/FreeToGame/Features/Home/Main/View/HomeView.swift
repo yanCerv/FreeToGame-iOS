@@ -30,7 +30,7 @@ struct HomeView: View {
                 ForEach(category.games, id: \.self) { game in
                   GameCardView(game: game)
                     .onTapGesture {
-                      withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+                      withAnimation(.spring(response: 0.8, dampingFraction: 1.1)) {
                         gameSelected = game
                         isShowDetail = true
                       }
