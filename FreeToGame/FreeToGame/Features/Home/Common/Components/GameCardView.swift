@@ -38,7 +38,6 @@ struct GameCardView: View {
     .background(Color.gray.opacity(0.5))
     .frame(width: 200)
     .cornerRadius(8)
-
   }
 }
 

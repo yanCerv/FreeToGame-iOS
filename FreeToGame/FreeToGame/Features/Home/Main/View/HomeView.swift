@@ -11,6 +11,10 @@ struct HomeView: View {
   
   @State var viewModel: HomeViewModel
   
+  @Namespace private var namespace
+  @State var isShowDetail: Bool = false
+  @State var gameSelected: Game? = nil
+  
   var body: some View {
     ContentView(loaderState: viewModel.loaderState) {
       ScrollView {
@@ -25,11 +29,28 @@ struct HomeView: View {
               LazyHStack(spacing: 12) {
                 ForEach(category.games, id: \.self) { game in
                   GameCardView(game: game)
+                    .onTapGesture {
+                      withAnimation(.spring(response: 0.5, dampingFraction: 0.8)) {
+                        gameSelected = game
+                        isShowDetail = true
+                      }
+                    }
                 }
               }
               .padding(.horizontal)
             }
           }
+        }
+        .blur(radius: isShowDetail ? 5 : 0)
+      }
+      .overlay {
+        if let gameSelected = gameSelected,
+           isShowDetail {
+          GameDetailView(viewModel: GameDetailViewModel(game: gameSelected,
+                                                        namespace: namespace,
+                                                        isPresented: $isShowDetail))
+            .zIndex(1)
+            .toolbar(.hidden, for: .navigationBar)
         }
       }
       .task {
