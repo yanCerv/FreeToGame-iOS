@@ -10,7 +10,7 @@ import Combine
 @testable import FreeToGame
 
 final class NetworkTest: XCTestCase {
-  
+  var requestActor: RequestActor!
   var homeClient: HomeClientProvider!
   var listGenreClient: ListGenreProvider!
   var response: [Game] = []
@@ -21,11 +21,13 @@ final class NetworkTest: XCTestCase {
   
   @MainActor
   override func setUpWithError() throws {
+    requestActor = RequestActor(serviceType: .mock, fileName: "GamesResponse")
     homeClient = HomeClient()
     listGenreClient = ListGenreClient()
   }
   
   override func tearDownWithError() throws {
+    requestActor = nil
     homeClient = nil
     response = []
     statusCode = 0
@@ -55,5 +57,20 @@ final class NetworkTest: XCTestCase {
     } catch {
       XCTFail("Expected success, but got error: \(error)")
     }
+  }
+  
+  func testRequestActor() async {
+    XCTAssertNotNil(requestActor)
+    
+    do {
+      let data = try await getDataTesting()
+      XCTAssertFalse(data.isEmpty)
+    } catch {
+      XCTFail("Expected success, but got error: \(error)")
+    }
+  }
+  
+  private func getDataTesting() async throws -> [Game] {
+    return try await requestActor.request(RequestConfiguration(path: "Test", method: .get))
   }
 }

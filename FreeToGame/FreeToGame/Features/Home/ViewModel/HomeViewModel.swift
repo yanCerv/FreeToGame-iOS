@@ -23,7 +23,8 @@ final class HomeViewModel: ShowErrorProtocol {
   //MARK: - Init
   
   @MainActor
-  init(_ client: HomeClientProvider = HomeClient(.service)) {
+  init(_ client: HomeClientProvider = HomeClient()) {
+//  init(_ client: HomeClientProvider = HomeClient(.service)) {
     self.client = client
   }
   

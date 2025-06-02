@@ -18,7 +18,7 @@ struct HomeView: View {
           ForEach(viewModel.categoryGames, id: \.title) { category in
             Text(category.title)
               .font(.system(size: 26, weight: .bold))
-              .foregroundColor(.secondary)
+              .foregroundColor(.white.opacity(0.8))
               .padding(10)
             
             ScrollView(.horizontal, showsIndicators: false) {

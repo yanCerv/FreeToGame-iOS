@@ -7,5 +7,6 @@
 
 struct RequestConfiguration: EndPoint {
   var path: String
+  var method: Method
   var bodyRequest: String?
 }

@@ -41,3 +41,36 @@ extension Request {
       .eraseToAnyPublisher()
   }
 }
+
+/// Update for new swift 6 method
+///  Swift Concurrency in the current state on protocol have some issues in client provider
+///  changing to this method The provider had to be changed and testings need changes as well
+actor RequestActor {
+  static let shared: RequestActor = RequestActor()
+  
+  private let serviceType: ServiceType
+  private let session: URLSession
+  private let fileName: String
+  
+  init(session: URLSession = .shared, serviceType: ServiceType = .service, fileName: String = "") {
+    self.session = session
+    self.serviceType = serviceType
+    self.fileName = fileName
+  }
+  
+  func request<T: Decodable>(_ configuration: RequestConfiguration) async throws -> T {
+    if serviceType == .mock {
+      return try JsonResource.getFrom(fileName, type: T.self)
+    } else {
+      let request = configuration.request
+      let (data, response) = try await session.data(for: request)
+      if let httpResponse = response as? HTTPURLResponse,
+         (200...299).contains(httpResponse.statusCode) {
+        return try JSONDecoder().decode(T.self, from: data)
+      } else {
+        let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
+        throw ErrorHandler.error(message: "HTTP Error", statusCode: statusCode)
+      }
+    }
+  }
+}

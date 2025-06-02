@@ -18,6 +18,7 @@ enum Method: String {
 
 protocol EndPoint {
   var path: String { get }
+  var method: Method { get }
   var bodyRequest: String? { get }
 }
 
@@ -32,7 +33,7 @@ extension EndPoint {
   }
   
   private var method: String {
-    return Method.post.rawValue
+    return method.rawValue
   }
   
   private var data: Data? {
@@ -52,7 +53,7 @@ extension EndPoint {
     var request = URLRequest(url: baseUrl)
     request.allHTTPHeaderFields = headers
     request.httpMethod = method
-    request.httpBody = data
+    request.httpBody = method == "GET" ? nil : data
     request.timeoutInterval = 300
     return request
   }

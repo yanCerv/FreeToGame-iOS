@@ -30,7 +30,7 @@ struct GameCardView: View {
       .clipped()
       
       Text(game.title)
-        .font(.system(size: 16, weight: .bold))
+        .font(.system(size: 15, weight: .bold))
         .foregroundColor(.secondary)
         .lineLimit(2)
         .padding(8)

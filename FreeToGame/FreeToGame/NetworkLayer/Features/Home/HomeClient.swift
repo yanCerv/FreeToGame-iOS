@@ -45,7 +45,6 @@ final class HomeClient: Request, HomeClientProvider, AssistErrorMessage {
         }
       }.store(in: &anyCancellables)
     }
-    
   }
   
   private func gameServices() -> AnyPublisher<[Game], ErrorHandler> {
@@ -62,5 +61,22 @@ final class HomeClient: Request, HomeClientProvider, AssistErrorMessage {
     } catch {
       return []
     }
+  }
+}
+
+// For New Swift 6 usability but need improvements, inconsistences calls in fetchDataGames using @MainActor
+
+actor HomeClientActor {
+  
+  let requestActor: RequestActor
+  
+  init(_ requestActor: RequestActor = .shared) {
+    self.requestActor = requestActor
+  }
+  
+  @MainActor
+  func fetchDataGames() async throws -> [Game] {
+    let configuration = HomeClientResources.getGames.config
+    return try await requestActor.request(configuration)
   }
 }

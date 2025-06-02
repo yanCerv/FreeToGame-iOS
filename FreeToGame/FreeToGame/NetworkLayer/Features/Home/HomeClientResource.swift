@@ -16,7 +16,7 @@ extension HomeClientResources {
     switch self {
     case .getGames:
       let path = "/games"
-      return  RequestConfiguration(path: path)
+      return  RequestConfiguration(path: path, method: .get)
     }
   }
 }

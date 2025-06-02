@@ -14,7 +14,7 @@ extension ListGenreResource {
     switch self {
     case .getgames(let genre):
       let path = "/games?category=\(genre)"
-      return  RequestConfiguration(path: path)
+      return  RequestConfiguration(path: path, method: .get)
     }
   }
 }
