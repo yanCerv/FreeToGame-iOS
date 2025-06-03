@@ -19,6 +19,7 @@ final class GameDetailViewModel {
   private(set) var gameDetail: GameDetail = GameDetail.emptyObject()
   private(set) var thumbNailId: String = ""
   private(set) var imageUrl: URL? = nil
+  private(set) var aboutGame: String = ""
   
   private var isLoadedData: Bool = false
   
@@ -48,6 +49,8 @@ final class GameDetailViewModel {
       self.gameDetail = gameDetail
       thumbNailId = "thumbnail_\(gameDetail.id)"
       imageUrl = URL(string: gameDetail.thumbnail)
+      aboutGame = "About \(gameDetail.title)"
+      debugPrint("Screenshoots", gameDetail.screenshots)
     } catch {
       debugPrint(error)
     }

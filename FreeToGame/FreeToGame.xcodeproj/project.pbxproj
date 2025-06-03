@@ -51,6 +51,7 @@
 		7CE42C082DEE746B00CB17C3 /* Screenshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE42C072DEE746B00CB17C3 /* Screenshot.swift */; };
 		7CE42C0A2DEE749F00CB17C3 /* MinimumSystemRequirements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE42C092DEE749F00CB17C3 /* MinimumSystemRequirements.swift */; };
 		7CE42C0C2DEE757300CB17C3 /* GameDetailMock.json in Resources */ = {isa = PBXBuildFile; fileRef = 7CE42C0B2DEE757300CB17C3 /* GameDetailMock.json */; };
+		7CE42C0E2DEE84C400CB17C3 /* DetailScreenShootsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CE42C0D2DEE84C400CB17C3 /* DetailScreenShootsView.swift */; };
 		7CF51C7D2CFA09D80001FC34 /* AssistErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF51C662CFA09D80001FC34 /* AssistErrorMessage.swift */; };
 		7CF51C7E2CFA09D80001FC34 /* ClientURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF51C672CFA09D80001FC34 /* ClientURLSession.swift */; };
 		7CF51C7F2CFA09D80001FC34 /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF51C682CFA09D80001FC34 /* ErrorHandler.swift */; };
@@ -123,6 +124,7 @@
 		7CE42C072DEE746B00CB17C3 /* Screenshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screenshot.swift; sourceTree = "<group>"; };
 		7CE42C092DEE749F00CB17C3 /* MinimumSystemRequirements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinimumSystemRequirements.swift; sourceTree = "<group>"; };
 		7CE42C0B2DEE757300CB17C3 /* GameDetailMock.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = GameDetailMock.json; sourceTree = "<group>"; };
+		7CE42C0D2DEE84C400CB17C3 /* DetailScreenShootsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailScreenShootsView.swift; sourceTree = "<group>"; };
 		7CF51C132CFA042F0001FC34 /* FreeToGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreeToGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CF51C242CFA04300001FC34 /* FreeToGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FreeToGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CF51C662CFA09D80001FC34 /* AssistErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssistErrorMessage.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				7C5056E62DECC0B900C8F2A6 /* GameCardView.swift */,
+				7CE42C0D2DEE84C400CB17C3 /* DetailScreenShootsView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -792,6 +795,7 @@
 				7CF51C7F2CFA09D80001FC34 /* ErrorHandler.swift in Sources */,
 				7C1D34332CFE721800DDA056 /* LoaderState.swift in Sources */,
 				7C7DE4372CFF850B00D52A34 /* NavigationButton.swift in Sources */,
+				7CE42C0E2DEE84C400CB17C3 /* DetailScreenShootsView.swift in Sources */,
 				7CE42C0A2DEE749F00CB17C3 /* MinimumSystemRequirements.swift in Sources */,
 				7CF51C802CFA09D80001FC34 /* EndPoint.swift in Sources */,
 				7CF51C812CFA09D80001FC34 /* Headers.swift in Sources */,
