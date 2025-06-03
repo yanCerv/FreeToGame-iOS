@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
   
-  @State var viewModel: HomeViewModel
+  @Bindable var viewModel: HomeViewModel
   @Namespace private var namespace
   
   var body: some View {
@@ -25,7 +25,7 @@ struct HomeView: View {
             ScrollView(.horizontal, showsIndicators: false) {
               LazyHStack(spacing: 12) {
                 ForEach(category.games, id: \.self) { game in
-                  GameCardView(game: game)
+                  GameCardView(game: game, namespace: namespace)
                     .onTapGesture {
                       withAnimation(.spring(response: 0.9, dampingFraction: 1.2)) {
                         viewModel.didtapOn(game)

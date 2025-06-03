@@ -9,6 +9,7 @@ import SwiftUI
 
 struct GameCardView: View {
   let game: Game
+  var namespace: Namespace.ID
 
   var body: some View {
     VStack(alignment: .leading, spacing: 10) {
@@ -18,6 +19,7 @@ struct GameCardView: View {
           image
             .resizable()
             .scaledToFill()
+            .matchedGeometryEffect(id: game.id, in: namespace)
         default:
           Color.red.opacity(0.6)
         }
@@ -37,5 +39,12 @@ struct GameCardView: View {
 }
 
 #Preview {
-  GameCardView(game: Game.previewGame())
+  struct PreviewWrapper: View {
+    @Namespace var namespace
+    
+    var body: some View {
+      GameCardView(game: Game.previewGame(), namespace: namespace)
+    }
+  }
+  return PreviewWrapper()
 }

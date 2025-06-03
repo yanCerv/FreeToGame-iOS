@@ -12,13 +12,14 @@ struct SelectedGenreListView: View {
   @EnvironmentObject var navigation: NavigationManager
   
   @State var viewModel: SelectedGenreListViewModel
+  @Namespace var namespace
   
   var body: some View {
     ContentView(loaderState: viewModel.loaderState) {
       ScrollView {
         LazyVStack {
           ForEach(viewModel.games, id: \.self) { game in
-            GameCardView(game: game)
+            GameCardView(game: game, namespace: namespace)
           }
         }
       }

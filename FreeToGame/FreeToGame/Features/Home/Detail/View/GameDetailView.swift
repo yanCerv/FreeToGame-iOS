@@ -29,13 +29,13 @@ struct GameDetailView: View {
             case .success(let image):
               image
                 .resizable()
-                .scaledToFit()
+                .scaledToFill()
+                .matchedGeometryEffect(id: viewModel.thumbNailId, in: viewModel.namespace)
             default:
               Color.red.opacity(0.2)
             }
           }
           .frame(maxWidth: .infinity, maxHeight: 300)
-          .matchedGeometryEffect(id: viewModel.thumbNailId, in: viewModel.namespace)
           
           HStack {
             Button {
