@@ -24,7 +24,7 @@ struct GameDetailView: View {
 
       ScrollView {
         VStack {
-          AsyncImage(url: viewModel.imageUrl) { phase in
+          CachedImage(url: viewModel.imageUrl) { phase in
             switch phase {
             case .success(let image):
               image

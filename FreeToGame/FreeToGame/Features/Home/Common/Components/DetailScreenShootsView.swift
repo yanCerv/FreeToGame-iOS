@@ -23,7 +23,7 @@ struct DetailScreenShootsView: View {
       ScrollView(.horizontal) {
         LazyHStack {
           ForEach(gameDetails.screenshots, id: \.self) { screenshot in
-            AsyncImage(url: URL(string: screenshot.image)) { phase in
+            CachedImage(url: URL(string: screenshot.image)) { phase in
               switch phase {
               case .success(let image):
                 image

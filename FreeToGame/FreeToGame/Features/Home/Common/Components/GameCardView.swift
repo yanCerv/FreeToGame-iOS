@@ -12,22 +12,16 @@ struct GameCardView: View {
 
   var body: some View {
     VStack(alignment: .leading, spacing: 10) {
-      AsyncImage(url: URL(string: game.thumbnail)) { phase in
+      CachedImage(url: URL(string: game.thumbnail)) { phase in
         switch phase {
-        case .empty:
-          Color.gray.opacity(0.2)
         case .success(let image):
           image
             .resizable()
             .scaledToFill()
-        case .failure:
-          Color.red.opacity(0.2)
-        @unknown default:
-          Color.gray.opacity(0.2)
+        default:
+          Color.red.opacity(0.6)
         }
       }
-      .frame(width: 200, height: 140)
-      .clipped()
       
       Text(game.title)
         .font(.system(size: 15, weight: .bold))
