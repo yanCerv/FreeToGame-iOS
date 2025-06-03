@@ -49,7 +49,7 @@ final class ListSelectedGenreViewModelTest: XCTestCase {
     
     XCTAssertTrue(!viewModel.genre.isEmpty)
     XCTAssertTrue(viewModel.isLoadedData)
-    XCTAssertEqual(viewModel.loaderState, .startLoading)
+    XCTAssertEqual(viewModel.loaderState, .finishLoading)
     XCTAssertTrue(viewModel.games.isEmpty)
   }
   

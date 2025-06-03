@@ -12,6 +12,7 @@ import Combine
 final class NetworkTest: XCTestCase {
   var requestActor: RequestActor!
   var homeClient: HomeClientProvider!
+  var detailClient: DetailClientProvider!
   var listGenreClient: ListGenreProvider!
   var response: [Game] = []
   var errorHandler: ErrorHandler?
@@ -24,6 +25,7 @@ final class NetworkTest: XCTestCase {
     requestActor = RequestActor(serviceType: .mock, fileName: "GamesResponse")
     homeClient = HomeClient()
     listGenreClient = ListGenreClient()
+    detailClient = DetailClientProviderTest()
   }
   
   override func tearDownWithError() throws {
@@ -72,5 +74,18 @@ final class NetworkTest: XCTestCase {
   
   private func getDataTesting() async throws -> [Game] {
     return try await requestActor.request(RequestConfiguration(path: "Test", method: .get))
+  }
+  
+  @MainActor
+  func testDetailClient() async {
+    
+    XCTAssertNotNil(detailClient)
+
+    do {
+      let data = try await detailClient.fetchDetail(by: 1)
+      XCTAssertFalse(data.id == 0)
+    } catch {
+      XCTFail("Expected success, but got error: \(error)")
+    }
   }
 }
