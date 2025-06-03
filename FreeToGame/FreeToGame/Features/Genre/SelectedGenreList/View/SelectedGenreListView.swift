@@ -17,17 +17,39 @@ struct SelectedGenreListView: View {
   var body: some View {
     ContentView(loaderState: viewModel.loaderState) {
       ScrollView {
-        LazyVStack {
+        LazyVGrid(columns: viewModel.columns, spacing: 6) {
           ForEach(viewModel.games, id: \.self) { game in
-            GameCardView(game: game, namespace: namespace)
+            GridGameCardView(game: game, namespace: namespace)
+              .onTapGesture {
+                withAnimation(.spring(response: 0.9, dampingFraction: 1.2)) {
+                  viewModel.didtapOn(game)
+                }
+              }
           }
         }
+        .padding(.horizontal, 16)
       }
       .task {
         await viewModel.didFetchGamesFromGenre()
       }
     }
     .navigationTitle(viewModel.genre)
+    .overlay {
+      if let gameSelected = viewModel.gameSelected,
+         viewModel.isShowDetail {
+        GameDetailView(viewModel: GameDetailViewModel(gameId: gameSelected.id,
+                                                      namespace: namespace,
+                                                      isPresented: $viewModel.isShowDetail))
+        .zIndex(1)
+        .toolbar(.hidden, for: .navigationBar)
+      }
+    }
+    .alert(viewModel.alertMessage, isPresented: $viewModel.showAlert) {
+      Button("OK") {
+        viewModel.didTapAlertAction()
+        navigation.back()
+      }
+    }
     .toolbar {
       ToolbarItem(placement: .topBarLeading) {
         NavigationButton(imageName: "chevron.backward") {

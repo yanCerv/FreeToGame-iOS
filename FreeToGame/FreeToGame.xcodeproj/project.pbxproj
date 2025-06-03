@@ -73,6 +73,7 @@
 		7CF51C952CFA0A850001FC34 /* HomeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF51C942CFA0A850001FC34 /* HomeClient.swift */; };
 		7CF51C992CFA0B190001FC34 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF51C982CFA0B190001FC34 /* Game.swift */; };
 		7CF51C9B2CFA0BCE0001FC34 /* HomeClientResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CF51C9A2CFA0BCE0001FC34 /* HomeClientResource.swift */; };
+		7CFA431D2DEFAEED004681C8 /* GridGameCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CFA431C2DEFAEED004681C8 /* GridGameCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,6 +158,7 @@
 		7CF51C982CFA0B190001FC34 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		7CF51C9A2CFA0BCE0001FC34 /* HomeClientResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeClientResource.swift; sourceTree = "<group>"; };
 		7CF51CA42CFA5B560001FC34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		7CFA431C2DEFAEED004681C8 /* GridGameCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridGameCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +278,7 @@
 		7C5056F62DECE5A300C8F2A6 /* Genre */ = {
 			isa = PBXGroup;
 			children = (
+				7CFA431B2DEFAEDC004681C8 /* Common */,
 				7C5057172DECFEDD00C8F2A6 /* ListGenre */,
 				7C5057202DECFF3500C8F2A6 /* SelectedGenreList */,
 			);
@@ -703,6 +706,14 @@
 			path = Features;
 			sourceTree = "<group>";
 		};
+		7CFA431B2DEFAEDC004681C8 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7CFA431C2DEFAEED004681C8 /* GridGameCardView.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		7CFB15052D861C6700DC762C /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -833,6 +844,7 @@
 				7CF51C7F2CFA09D80001FC34 /* ErrorHandler.swift in Sources */,
 				7C46C1F22DEF359A005E5B88 /* DetailAditionalContentView.swift in Sources */,
 				7C1D34332CFE721800DDA056 /* LoaderState.swift in Sources */,
+				7CFA431D2DEFAEED004681C8 /* GridGameCardView.swift in Sources */,
 				7C46C1F02DEF34C3005E5B88 /* DetailAditionalInformationView.swift in Sources */,
 				7C7DE4372CFF850B00D52A34 /* NavigationButton.swift in Sources */,
 				7CE42C0E2DEE84C400CB17C3 /* DetailScreenShootsView.swift in Sources */,

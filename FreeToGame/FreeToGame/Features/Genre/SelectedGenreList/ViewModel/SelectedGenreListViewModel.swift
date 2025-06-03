@@ -15,6 +15,13 @@ final class SelectedGenreListViewModel {
   private(set) var isLoadedData: Bool = false
   private(set) var loaderState: LoaderState = .finishLoading
   private(set) var games: [Game] = []
+  private(set) var alertMessage: String = ""
+  
+  private(set) var columns = [GridItem(.fixed(160)), GridItem(.fixed(160))]
+  
+  var showAlert: Bool = false
+  var isShowDetail: Bool = false
+  var gameSelected: Game? = nil
   
   //MARK: Init
   
@@ -26,6 +33,16 @@ final class SelectedGenreListViewModel {
   
   //MARK: Methods
   
+  func didTapAlertAction() {
+    showAlert = false
+    alertMessage = ""
+  }
+  
+  func didtapOn(_ game: Game) {
+    gameSelected = game
+    isShowDetail = true
+  }
+  
   @MainActor
   func didFetchGamesFromGenre() async {
     guard !isLoadedData else { return }
@@ -33,12 +50,12 @@ final class SelectedGenreListViewModel {
     do {
       let dataGames = try await client.fetchList(genre)
       games = dataGames
-      loaderState = .finishLoading
     } catch {
-      //TODO show Empty state
-      debugPrint("Error \(error)")
+      showAlert = true
+      alertMessage = "No Games founded in this Genre"
     }
     isLoadedData = true
+    loaderState = .finishLoading
   }
   
   //MARK: Private Methods
