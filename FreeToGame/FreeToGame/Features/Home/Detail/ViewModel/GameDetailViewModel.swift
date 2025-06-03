@@ -22,6 +22,7 @@ final class GameDetailViewModel {
   private(set) var aboutGame: String = ""
   
   var isShowRequirements: Bool = false
+  var isShowAditionalInfo: Bool = false
   
   private var isLoadedData: Bool = false
   
@@ -47,6 +48,9 @@ final class GameDetailViewModel {
     isShowRequirements = true
   }
   
+  func didTapShowAditionalInfo() {
+    isShowAditionalInfo = true
+  }
   
   @MainActor
   func fethGameDetail() async {

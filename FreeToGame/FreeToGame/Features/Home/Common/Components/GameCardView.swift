@@ -22,6 +22,7 @@ struct GameCardView: View {
           Color.red.opacity(0.6)
         }
       }
+      .frame(width: 200, height: 150)
       
       Text(game.title)
         .font(.system(size: 15, weight: .bold))

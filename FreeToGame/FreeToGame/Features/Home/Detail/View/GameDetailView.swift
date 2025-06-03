@@ -48,7 +48,7 @@ struct GameDetailView: View {
             .padding(.horizontal, 16)
 
             Button {
-              viewModel.didTapShowRequirements()
+              viewModel.didTapShowAditionalInfo()
             } label: {
               Text("Additional Information")
             }
@@ -70,6 +70,11 @@ struct GameDetailView: View {
     .background(Color.black.edgesIgnoringSafeArea(.all))
     .sheet(isPresented: $viewModel.isShowRequirements) {
       DetailRequirementsView(requirements: viewModel.gameDetail.requirements)
+        .presentationDetents([.fraction(0.4)])
+        .presentationDragIndicator(.visible)
+    }
+    .sheet(isPresented: $viewModel.isShowAditionalInfo) {
+      DetailAditionalInformationView(gameDetail: viewModel.gameDetail)
         .presentationDetents([.fraction(0.4)])
         .presentationDragIndicator(.visible)
     }
