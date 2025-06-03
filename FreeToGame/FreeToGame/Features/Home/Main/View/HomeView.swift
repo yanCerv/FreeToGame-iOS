@@ -10,10 +10,7 @@ import SwiftUI
 struct HomeView: View {
   
   @State var viewModel: HomeViewModel
-  
   @Namespace private var namespace
-  @State var isShowDetail: Bool = false
-  @State var gameSelected: Game? = nil
   
   var body: some View {
     ContentView(loaderState: viewModel.loaderState) {
@@ -31,8 +28,7 @@ struct HomeView: View {
                   GameCardView(game: game)
                     .onTapGesture {
                       withAnimation(.spring(response: 0.8, dampingFraction: 1.1)) {
-                        gameSelected = game
-                        isShowDetail = true
+                        viewModel.didtapOn(game)
                       }
                     }
                 }
@@ -41,16 +37,16 @@ struct HomeView: View {
             }
           }
         }
-        .blur(radius: isShowDetail ? 5 : 0)
+        .blur(radius: viewModel.isShowDetail ? 5 : 0)
       }
       .overlay {
-        if let gameSelected = gameSelected,
-           isShowDetail {
-          GameDetailView(viewModel: GameDetailViewModel(game: gameSelected,
+        if let gameSelected = viewModel.gameSelected,
+           viewModel.isShowDetail {
+          GameDetailView(viewModel: GameDetailViewModel(gameId: gameSelected.id,
                                                         namespace: namespace,
-                                                        isPresented: $isShowDetail))
-            .zIndex(1)
-            .toolbar(.hidden, for: .navigationBar)
+                                                        isPresented: $viewModel.isShowDetail))
+          .zIndex(1)
+          .toolbar(.hidden, for: .navigationBar)
         }
       }
       .task {

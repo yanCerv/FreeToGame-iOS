@@ -10,21 +10,49 @@ import SwiftUI
 @Observable
 final class GameDetailViewModel {
   
-  private(set) var game: Game
+  private let client: DetailClientProvider
+  
+  private(set) var gameId: Int
   private(set) var namespace: Namespace.ID
   private(set) var isPresented: Binding<Bool>
-  private(set) var thumbNailId: String = ""
-  private(set) var imageUrl : URL? = nil
   
-  init(game: Game, namespace: Namespace.ID, isPresented: Binding<Bool>) {
-    self.game = game
+  private(set) var gameDetail: GameDetail = GameDetail.emptyObject()
+  private(set) var thumbNailId: String = ""
+  private(set) var imageUrl: URL? = nil
+  
+  private var isLoadedData: Bool = false
+  
+  //MARK: Init
+  
+  @MainActor
+  init(gameId: Int, namespace: Namespace.ID, isPresented: Binding<Bool>, client: DetailClientProvider = DetailClient()) {
+    self.gameId = gameId
     self.namespace = namespace
     self._isPresented = isPresented
-    thumbNailId = "thumbnail_\(game.id)"
-    imageUrl = URL(string: game.thumbnail)
+    self.client = client
   }
+  
+  //MARK: Methods
   
   func didTapCloseView() {
     isPresented.wrappedValue = false
+    imageUrl = nil
+    thumbNailId = ""
   }
+  
+  
+  @MainActor
+  func fethGameDetail() async {
+    do {
+      let gameDetail = try await client.fetchDetail(by: gameId)
+      self.gameDetail = gameDetail
+      thumbNailId = "thumbnail_\(gameDetail.id)"
+      imageUrl = URL(string: gameDetail.thumbnail)
+    } catch {
+      debugPrint(error)
+    }
+  }
+  
+  //MARK: Private Methods
+  
 }

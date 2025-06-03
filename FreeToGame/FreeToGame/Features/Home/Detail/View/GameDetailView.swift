@@ -35,14 +35,14 @@ struct GameDetailView: View {
       .frame(maxWidth: .infinity, maxHeight: 300)
       .matchedGeometryEffect(id: viewModel.thumbNailId, in: viewModel.namespace)
 
-      Text(viewModel.game.title)
+      Text(viewModel.gameDetail.title)
         .font(.largeTitle).bold()
         .foregroundColor(.white)
         .opacity(0.8)
         .padding(.top, 10)
         .padding(.horizontal, 16)
       
-      Text(viewModel.game.shortDescription)
+      Text(viewModel.gameDetail.shortDescription)
         .font(.subheadline).fontWeight(.medium)
         .foregroundStyle(.secondary)
         .padding(.horizontal, 16)
@@ -50,5 +50,8 @@ struct GameDetailView: View {
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(Color.black.edgesIgnoringSafeArea(.all))
+    .task {
+      await viewModel.fethGameDetail()
+    }
   }
 }

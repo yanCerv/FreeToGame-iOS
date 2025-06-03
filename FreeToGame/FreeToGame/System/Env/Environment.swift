@@ -45,13 +45,10 @@ final class Environment {
   
   private func getKeyEnv() -> EnvironmentType {
      #if Store
-    debugPrint("Environment PRODUCTION")
     return .Store
      #elseif QA
-    debugPrint("Environment UAT - QA")
     return .QA
      #else
-    debugPrint("Environment STAGE")
     return .Stage
      #endif
   }

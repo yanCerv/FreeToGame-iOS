@@ -16,6 +16,9 @@ final class HomeViewModel: ShowErrorProtocol {
   private(set) var categoryGames: [CategoryGames] = []
   private(set) var errorMessage: String = ""
   private(set) var showErrorAlert: Bool = false
+  
+  var isShowDetail: Bool = false
+  var gameSelected: Game? = nil
     
   private var isLoadedData: Bool = false
   private let maxItemPerCategory: Int = 6
@@ -24,11 +27,15 @@ final class HomeViewModel: ShowErrorProtocol {
   
   @MainActor
   init(_ client: HomeClientProvider = HomeClient()) {
-//  init(_ client: HomeClientProvider = HomeClient(.service)) {
     self.client = client
   }
   
   //MARK: - Methods
+  
+  func didtapOn(_ game: Game) {
+    gameSelected = game
+    isShowDetail = true
+  }
   
   @MainActor
   func fetchGames() async {
