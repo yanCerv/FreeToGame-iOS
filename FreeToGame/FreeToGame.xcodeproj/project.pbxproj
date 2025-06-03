@@ -15,6 +15,7 @@
 		7C46C1E02DEEFD05005E5B88 /* DetailDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C46C1DF2DEEFD05005E5B88 /* DetailDescriptionView.swift */; };
 		7C46C1E22DEEFF49005E5B88 /* DetailRequirementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C46C1E12DEEFF49005E5B88 /* DetailRequirementsView.swift */; };
 		7C46C1E42DEF05DF005E5B88 /* RequirementsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C46C1E32DEF05DF005E5B88 /* RequirementsRow.swift */; };
+		7C46C1EA2DEF11FB005E5B88 /* DetailCorneredButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C46C1E82DEF11FB005E5B88 /* DetailCorneredButtonStyle.swift */; };
 		7C5056D62DEC880900C8F2A6 /* ShowErrorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5056D42DEC880900C8F2A6 /* ShowErrorProtocol.swift */; };
 		7C5056EB2DECC0B900C8F2A6 /* GameCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5056E62DECC0B900C8F2A6 /* GameCardView.swift */; };
 		7C5056EC2DECC0B900C8F2A6 /* CategoryGames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C5056E82DECC0B900C8F2A6 /* CategoryGames.swift */; };
@@ -90,6 +91,7 @@
 		7C46C1DF2DEEFD05005E5B88 /* DetailDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDescriptionView.swift; sourceTree = "<group>"; };
 		7C46C1E12DEEFF49005E5B88 /* DetailRequirementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRequirementsView.swift; sourceTree = "<group>"; };
 		7C46C1E32DEF05DF005E5B88 /* RequirementsRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequirementsRow.swift; sourceTree = "<group>"; };
+		7C46C1E82DEF11FB005E5B88 /* DetailCorneredButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCorneredButtonStyle.swift; sourceTree = "<group>"; };
 		7C5056D42DEC880900C8F2A6 /* ShowErrorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowErrorProtocol.swift; sourceTree = "<group>"; };
 		7C5056E62DECC0B900C8F2A6 /* GameCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCardView.swift; sourceTree = "<group>"; };
 		7C5056E82DECC0B900C8F2A6 /* CategoryGames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryGames.swift; sourceTree = "<group>"; };
@@ -151,14 +153,6 @@
 		7CF51CA42CFA5B560001FC34 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		7C46C1E52DEF0D4F005E5B88 /* ButtonStyles */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ButtonStyles;
-			sourceTree = "<group>";
-		};
-/* End PBXFileSystemSynchronizedRootGroup section */
-
 /* Begin PBXFrameworksBuildPhase section */
 		7CF51C102CFA042F0001FC34 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -190,7 +184,7 @@
 		7C1D342B2CFE704600DDA056 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				7C46C1E52DEF0D4F005E5B88 /* ButtonStyles */,
+				7C46C1E92DEF11FB005E5B88 /* ButtonStyles */,
 				7C5056EE2DECC28D00C8F2A6 /* Helpers&Extension */,
 				7C5056D52DEC880900C8F2A6 /* Protocols */,
 				7C7DE43C2CFF85D900D52A34 /* Navigation */,
@@ -207,6 +201,14 @@
 				7C1D342F2CFE71F800DDA056 /* ContentView.swift */,
 			);
 			path = ContentView;
+			sourceTree = "<group>";
+		};
+		7C46C1E92DEF11FB005E5B88 /* ButtonStyles */ = {
+			isa = PBXGroup;
+			children = (
+				7C46C1E82DEF11FB005E5B88 /* DetailCorneredButtonStyle.swift */,
+			);
+			path = ButtonStyles;
 			sourceTree = "<group>";
 		};
 		7C5056D52DEC880900C8F2A6 /* Protocols */ = {
@@ -706,9 +708,6 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				7C46C1E52DEF0D4F005E5B88 /* ButtonStyles */,
-			);
 			name = FreeToGame;
 			packageProductDependencies = (
 			);
@@ -827,6 +826,7 @@
 				7C7DE4592CFFAB7400D52A34 /* JsonResource.swift in Sources */,
 				7CE42BFA2DEE654200CB17C3 /* GameDetailView.swift in Sources */,
 				7CF51C832CFA09D80001FC34 /* Request.swift in Sources */,
+				7C46C1EA2DEF11FB005E5B88 /* DetailCorneredButtonStyle.swift in Sources */,
 				7C7DE4432CFF947100D52A34 /* TabContainer.swift in Sources */,
 				7C5056F02DECC2A400C8F2A6 /* DateFormatt+Extension.swift in Sources */,
 				7C7DE4412CFF92B500D52A34 /* MainTabView.swift in Sources */,
