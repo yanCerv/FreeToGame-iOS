@@ -21,6 +21,8 @@ final class GameDetailViewModel {
   private(set) var imageUrl: URL? = nil
   private(set) var aboutGame: String = ""
   
+  var isShowRequirements: Bool = false
+  
   private var isLoadedData: Bool = false
   
   //MARK: Init
@@ -39,6 +41,10 @@ final class GameDetailViewModel {
     isPresented.wrappedValue = false
     imageUrl = nil
     thumbNailId = ""
+  }
+  
+  func didTapShowRequirements() {
+    isShowRequirements = true
   }
   
   

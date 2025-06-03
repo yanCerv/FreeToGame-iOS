@@ -17,4 +17,14 @@ actor JsonResource {
       throw error
     }
   }
+  
+  static func getResourcePreview<T: Decodable>(_ fileName: String, type: T.Type) -> T? {
+    let bundle = Bundle(for: JsonResource.self)
+    let url = bundle.url(forResource: fileName, withExtension: "json")!
+    do {
+      return try JSONDecoder().decode(type.self, from: Data(contentsOf: url))
+    } catch {
+      return nil
+    }
+  }
 }
