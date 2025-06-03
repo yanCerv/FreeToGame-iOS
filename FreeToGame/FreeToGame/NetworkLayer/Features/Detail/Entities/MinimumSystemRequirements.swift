@@ -11,4 +11,9 @@ struct MinimumSystemRequirements: Decodable {
   let memory: String
   let graphics: String
   let storage: String
+  
+  static func empty() -> MinimumSystemRequirements {
+    return MinimumSystemRequirements(os: "", processor: "", memory: "", graphics: "", storage: ""
+    )
+  }
 }

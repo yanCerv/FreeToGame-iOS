@@ -28,11 +28,6 @@ struct MainTabView: View {
       }
       .tint(.white)
       .preferredColorScheme(.dark)
-      .toolbar {
-        NavigationButton(imageName: "magnifyingglass") {
-          navigation.paths.append(.search)
-        }
-      }
       .navigationTitle("Free To Game")
       .navigationBarTitleDisplayMode(.inline)
       .toolbarBackground(.visible, for: .navigationBar)

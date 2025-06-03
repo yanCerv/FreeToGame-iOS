@@ -19,7 +19,7 @@ struct GameDetail: Decodable {
   let developer: String
   let releaseDate: String
   let freetogameProfileURL: String
-  let minimumSystemRequirements: MinimumSystemRequirements
+  let minimumSystemRequirements: MinimumSystemRequirements?
   let screenshots: [Screenshot]
   
   enum CodingKeys: String, CodingKey {
@@ -38,6 +38,11 @@ struct GameDetail: Decodable {
     case freetogameProfileURL = "freetogame_profile_url"
     case minimumSystemRequirements = "minimum_system_requirements"
     case screenshots = "screenshots"
+  }
+  
+  var requirements: MinimumSystemRequirements {
+    guard let minimumSystemRequirements else { return MinimumSystemRequirements.empty()}
+    return minimumSystemRequirements
   }
   
   static func emptyObject() -> GameDetail {

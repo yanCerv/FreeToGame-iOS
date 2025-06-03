@@ -24,5 +24,5 @@ struct DetailRequirementsView: View {
 }
 
 #Preview {
-  DetailRequirementsView(requirements: JsonResource.getResourcePreview("GameDetailMock", type: GameDetail.self)!.minimumSystemRequirements)
+  DetailRequirementsView(requirements: JsonResource.getResourcePreview("GameDetailMock", type: GameDetail.self)!.minimumSystemRequirements!)
 }

@@ -39,6 +39,9 @@ struct HomeView: View {
         }
         .blur(radius: viewModel.isShowDetail ? 5 : 0)
       }
+      .refreshable {
+        await viewModel.fetchGames()
+      }
       .overlay {
         if let gameSelected = viewModel.gameSelected,
            viewModel.isShowDetail {

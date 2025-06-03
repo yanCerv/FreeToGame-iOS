@@ -69,7 +69,7 @@ struct GameDetailView: View {
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(Color.black.edgesIgnoringSafeArea(.all))
     .sheet(isPresented: $viewModel.isShowRequirements) {
-      DetailRequirementsView(requirements: viewModel.gameDetail.minimumSystemRequirements)
+      DetailRequirementsView(requirements: viewModel.gameDetail.requirements)
         .presentationDetents([.fraction(0.4)])
         .presentationDragIndicator(.visible)
     }
