@@ -15,6 +15,7 @@ final class NetworkTest: XCTestCase {
   var detailClient: DetailClientProvider!
   var listGenreClient: ListGenreProvider!
   var response: [Game] = []
+  var responseDetails: GameDetail?
   var errorHandler: ErrorHandler?
   var isSuccess: Bool = false
   var message: String = ""
@@ -86,6 +87,19 @@ final class NetworkTest: XCTestCase {
       XCTAssertFalse(data.id == 0)
     } catch {
       XCTFail("Expected success, but got error: \(error)")
+    }
+  }
+  
+  @MainActor
+  func testDetailFailure() async {
+    detailClient = DetailClientProviderTest(responseType: .failure)
+    XCTAssertNotNil(detailClient)
+
+    do {
+       _ = try await detailClient.fetchDetail(by: 1)
+      XCTFail("Expected success, but got error")
+    } catch {
+      XCTAssertTrue(responseDetails == nil)
     }
   }
 }
