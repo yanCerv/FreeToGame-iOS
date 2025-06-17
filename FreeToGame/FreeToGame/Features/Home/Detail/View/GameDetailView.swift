@@ -14,7 +14,7 @@ struct GameDetailView: View {
   var body: some View {
     VStack {
         NavigationButton(imageName: "xmark.circle.fill", action: {
-          withAnimation(.spring(response: 0.8, dampingFraction: 0.8)) {
+          withAnimation(.spring(response: 0.3, dampingFraction: 0.9)) {
             viewModel.didTapCloseView()
           }
         })
@@ -30,7 +30,7 @@ struct GameDetailView: View {
               image
                 .resizable()
                 .scaledToFill()
-                .matchedGeometryEffect(id: viewModel.thumbNailId, in: viewModel.namespace)
+                .matchedGeometryEffect(id: viewModel.game.id, in: viewModel.namespace)
             default:
               Color.red.opacity(0.2)
             }

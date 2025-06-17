@@ -27,7 +27,7 @@ struct HomeView: View {
                 ForEach(category.games, id: \.self) { game in
                   GameCardView(game: game, namespace: namespace)
                     .onTapGesture {
-                      withAnimation(.spring(response: 0.9, dampingFraction: 1.2)) {
+                      withAnimation(.spring(response: 0.3, dampingFraction: 0.9)) {
                         viewModel.didtapOn(game)
                       }
                     }
@@ -45,11 +45,17 @@ struct HomeView: View {
       .overlay {
         if let gameSelected = viewModel.gameSelected,
            viewModel.isShowDetail {
-          GameDetailView(viewModel: GameDetailViewModel(gameId: gameSelected.id,
-                                                        namespace: namespace,
-                                                        isPresented: $viewModel.isShowDetail))
-          .zIndex(1)
+          ZStack {
+            Color.black.opacity(0.5)
+              .ignoresSafeArea()
+              .transition(.opacity)
+            
+            GameDetailView(viewModel: GameDetailViewModel(game: gameSelected,
+                                                          namespace: namespace,
+                                                          isPresented: $viewModel.isShowDetail))
+          }
           .toolbar(.hidden, for: .navigationBar)
+          .zIndex(1)
         }
       }
       .task {

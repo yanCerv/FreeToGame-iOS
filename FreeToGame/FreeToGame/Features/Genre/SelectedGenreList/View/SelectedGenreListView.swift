@@ -21,7 +21,7 @@ struct SelectedGenreListView: View {
           ForEach(viewModel.games, id: \.self) { game in
             GridGameCardView(game: game, namespace: namespace)
               .onTapGesture {
-                withAnimation(.spring(response: 0.9, dampingFraction: 1.2)) {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.9)) {
                   viewModel.didtapOn(game)
                 }
               }
@@ -37,7 +37,7 @@ struct SelectedGenreListView: View {
     .overlay {
       if let gameSelected = viewModel.gameSelected,
          viewModel.isShowDetail {
-        GameDetailView(viewModel: GameDetailViewModel(gameId: gameSelected.id,
+        GameDetailView(viewModel: GameDetailViewModel(game: gameSelected,
                                                       namespace: namespace,
                                                       isPresented: $viewModel.isShowDetail))
         .zIndex(1)

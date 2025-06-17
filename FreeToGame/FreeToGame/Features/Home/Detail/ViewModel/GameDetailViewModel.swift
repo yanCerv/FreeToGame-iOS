@@ -12,12 +12,11 @@ final class GameDetailViewModel {
   
   private let client: DetailClientProvider
   
-  private(set) var gameId: Int
+  private(set) var game: Game
   private(set) var namespace: Namespace.ID
   private(set) var isPresented: Binding<Bool>
   
   private(set) var gameDetail: GameDetail = GameDetail.emptyObject()
-  private(set) var thumbNailId: String = ""
   private(set) var imageUrl: URL? = nil
   private(set) var aboutGame: String = ""
   
@@ -29,11 +28,12 @@ final class GameDetailViewModel {
   //MARK: Init
   
   @MainActor
-  init(gameId: Int, namespace: Namespace.ID, isPresented: Binding<Bool>, client: DetailClientProvider = DetailClient()) {
-    self.gameId = gameId
+  init(game: Game, namespace: Namespace.ID, isPresented: Binding<Bool>, client: DetailClientProvider = DetailClient()) {
+    self.game = game
     self.namespace = namespace
     self._isPresented = isPresented
     self.client = client
+    imageUrl = URL(string: game.thumbnail)
   }
   
   //MARK: Methods
@@ -41,7 +41,6 @@ final class GameDetailViewModel {
   func didTapCloseView() {
     isPresented.wrappedValue = false
     imageUrl = nil
-    thumbNailId = ""
   }
   
   func didTapShowRequirements() {
@@ -55,10 +54,9 @@ final class GameDetailViewModel {
   @MainActor
   func fethGameDetail() async {
     do {
-      let gameDetail = try await client.fetchDetail(by: gameId)
+      let gameDetail = try await client.fetchDetail(by: game.id)
       self.gameDetail = gameDetail
-      thumbNailId = "thumbnail_\(gameDetail.id)"
-      imageUrl = URL(string: gameDetail.thumbnail)
+    //  imageUrl = URL(string: gameDetail.thumbnail)
       aboutGame = "About \(gameDetail.title)"
       debugPrint("Screenshoots", gameDetail.screenshots)
     } catch {
