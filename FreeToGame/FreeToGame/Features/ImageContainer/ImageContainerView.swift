@@ -21,11 +21,11 @@ struct ImageContainerView: View {
         .resizable()
         .clipShape(RoundedRectangle(cornerRadius: isTapped ? 0 : 18))
         .frame(
-          width: isTapped ? UIScreen.main.bounds.width : 100,
-          height: isTapped ? UIScreen.main.bounds.height : 100
+          width: isTapped ? UIScreen.main.bounds.width : .infinity,
+          height: isTapped ? UIScreen.main.bounds.height : 200
         )
         .scaleEffect(isTapped ? 1.0 : 0.8)
-        .animation(.spring(response: 0.5, dampingFraction: 0.75), value: isTapped)
+        .animation(.spring(response: 0.5, dampingFraction: 1), value: isTapped)
         .onTapGesture {
           isTapped.toggle()
         }

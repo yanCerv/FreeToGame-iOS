@@ -32,7 +32,7 @@ extension EndPoint {
     return Headers.values()
   }
   
-  private var method: String {
+  private var methodValue: String {
     return method.rawValue
   }
   
@@ -52,8 +52,8 @@ extension EndPoint {
   var request: URLRequest {
     var request = URLRequest(url: baseUrl)
     request.allHTTPHeaderFields = headers
-    request.httpMethod = method
-    request.httpBody = method == "GET" ? nil : data
+    request.httpMethod = methodValue
+    request.httpBody = methodValue == "GET" ? nil : data
     request.timeoutInterval = 300
     return request
   }

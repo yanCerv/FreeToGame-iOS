@@ -10,21 +10,11 @@ import SwiftUI
 struct GameCardView: View {
   let game: Game
   var namespace: Namespace.ID
-
+  
   var body: some View {
     VStack(alignment: .leading, spacing: 10) {
-      CachedImage(url: URL(string: game.thumbnail)) { phase in
-        switch phase {
-        case .success(let image):
-          image
-            .resizable()
-            .scaledToFill()
-            .matchedGeometryEffect(id: game.id, in: namespace)
-        default:
-          Color.red.opacity(0.6)
-        }
-      }
-      .frame(width: 200, height: 150)
+      CachedImageContent(imageUrl: game.thumbnail, imageId: game.id, namespace: namespace)
+        .frame(width: 200, height: 150)
       
       Text(game.title)
         .font(.system(size: 15, weight: .bold))

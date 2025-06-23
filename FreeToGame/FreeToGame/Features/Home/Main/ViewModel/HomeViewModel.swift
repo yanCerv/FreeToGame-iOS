@@ -8,8 +8,9 @@
 import SwiftUI
 
 @Observable
-final class HomeViewModel: ShowErrorProtocol {
+final class HomeViewModel {
   
+  private let clientActor: HomeClientActor
   private let client: HomeClientProvider
   
   private(set) var loaderState: LoaderState = .finishLoading
@@ -26,8 +27,9 @@ final class HomeViewModel: ShowErrorProtocol {
   //MARK: - Init
   
   @MainActor
-  init(_ client: HomeClientProvider = HomeClient()) {
+  init(_ client: HomeClientProvider = HomeClient(), clientActor: HomeClientActor = .shared) {
     self.client = client
+    self.clientActor = clientActor
   }
   
   //MARK: - Methods
@@ -42,10 +44,11 @@ final class HomeViewModel: ShowErrorProtocol {
     guard !isLoadedData else { return }
     loaderState = .startLoading
     do {
+   //   let games = try await clientActor.fetchDataGames()
       let games = try await client.fetchDataGames()
       categoryGames = configGamesCategory(games)
     } catch {
-      errorMessage = handled(error)
+    //  errorMessage = handled(error)
       showErrorAlert = true
     }
     isLoadedData = true
@@ -57,10 +60,14 @@ final class HomeViewModel: ShowErrorProtocol {
   private func configGamesCategory(_ games: [Game]) -> [CategoryGames] {
     let trendingGames = Array(games.prefix(maxItemPerCategory))
     let dateFormatter = DateFormatter.formatter(type: .fullDate)
-    let newReleases = Array(games.sorted { guard let date1 = dateFormatter.date(from: $0.releaseDate),
-                                                 let date2 = dateFormatter.date(from: $1.releaseDate) else { return false }
-      return date1 > date2
-    }.prefix(maxItemPerCategory))
+    let newReleases = games
+      .compactMap { game -> (Game, Date)? in
+        guard let date = dateFormatter.date(from: game.releaseDate) else { return nil }
+        return (game, date)
+      }
+      .sorted { $0.1 > $1.1 }
+      .prefix(maxItemPerCategory)
+      .map { $0.0 }
     
     let communityRecommendations = Array(games.shuffled().prefix(maxItemPerCategory))
     

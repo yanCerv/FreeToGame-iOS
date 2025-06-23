@@ -48,29 +48,20 @@ extension Request {
 actor RequestActor {
   static let shared: RequestActor = RequestActor()
   
-  private let serviceType: ServiceType
-  private let session: URLSession
-  private let fileName: String
-  
-  init(session: URLSession = .shared, serviceType: ServiceType = .service, fileName: String = "") {
-    self.session = session
-    self.serviceType = serviceType
-    self.fileName = fileName
-  }
+  private let sessionDelegate = ClientURLSession()
+  private lazy var session: URLSession = {
+    return URLSession(configuration: .default, delegate: sessionDelegate, delegateQueue: nil)
+  }()
   
   func request<T: Decodable>(_ configuration: RequestConfiguration) async throws -> T {
-    if serviceType == .mock {
-      return try JsonResource.getFrom(fileName, type: T.self)
+    let request = configuration.request
+    let (data, response) = try await session.data(for: request)
+    if let httpResponse = response as? HTTPURLResponse,
+       (200...299).contains(httpResponse.statusCode) {
+      return try JSONDecoder().decode(T.self, from: data)
     } else {
-      let request = configuration.request
-      let (data, response) = try await session.data(for: request)
-      if let httpResponse = response as? HTTPURLResponse,
-         (200...299).contains(httpResponse.statusCode) {
-        return try JSONDecoder().decode(T.self, from: data)
-      } else {
-        let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
-        throw ErrorHandler.error(message: "HTTP Error", statusCode: statusCode)
-      }
+      let statusCode = (response as? HTTPURLResponse)?.statusCode ?? -1
+      throw ErrorHandler.error(message: "HTTP Error", statusCode: statusCode)
     }
   }
 }

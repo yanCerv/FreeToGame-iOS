@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
   
-  @Bindable var viewModel: HomeViewModel
+  @State var viewModel: HomeViewModel = HomeViewModel()
   @Namespace private var namespace
   
   var body: some View {
@@ -27,7 +27,7 @@ struct HomeView: View {
                 ForEach(category.games, id: \.self) { game in
                   GameCardView(game: game, namespace: namespace)
                     .onTapGesture {
-                      withAnimation(.spring(response: 0.3, dampingFraction: 0.9)) {
+                      withAnimation(.spring(response: 0.3, dampingFraction: 1)) {
                         viewModel.didtapOn(game)
                       }
                     }

@@ -14,7 +14,7 @@ struct MainTabView: View {
   var body: some View {
     NavigationStack(path: $navigation.paths) {
       TabView {
-        HomeView(viewModel: HomeViewModel())
+        HomeView()
           .tabItem {
             Image(systemName: "gamecontroller.fill")
             Text("Trending")
