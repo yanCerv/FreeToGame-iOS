@@ -57,7 +57,6 @@ final class GameDetailViewModel {
       let gameDetail = try await client.fetchDetail(by: game.id)
       self.gameDetail = gameDetail
       aboutGame = "About \(gameDetail.title)"
-      debugPrint("Screenshoots", gameDetail.screenshots)
     } catch {
       debugPrint(error)
     }

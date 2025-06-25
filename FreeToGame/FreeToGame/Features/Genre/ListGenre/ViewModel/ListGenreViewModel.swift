@@ -32,7 +32,6 @@ final class ListGenreViewModel: ShowErrorProtocol {
     do {
       let games = try await client.fetchDataGames()
       genres = configListGenre(games)
-      debugPrint(genres)
       loaderState = .finishLoading
     } catch {
       self.errorMessage = handled(error)

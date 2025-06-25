@@ -7,6 +7,8 @@
 
 import Foundation
 
+//  This protocol defines a strategy for handling errors and converting them into user-friendly messages.
+//  Types conforming to this protocol can override the default behavior to customize error presentation.
 protocol ShowErrorProtocol {
   func handled(_ error: Error) -> String
 }

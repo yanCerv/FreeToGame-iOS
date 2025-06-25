@@ -37,7 +37,7 @@ struct HomeView: View {
             }
           }
         }
-        .blur(radius: viewModel.isShowDetail ? 5 : 0)
+        .blur(radius: viewModel.isShowDetail ? 9 : 0)
       }
       .refreshable {
         await viewModel.fetchGames()
