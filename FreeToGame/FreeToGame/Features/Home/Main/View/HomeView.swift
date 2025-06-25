@@ -27,7 +27,7 @@ struct HomeView: View {
                 ForEach(category.games, id: \.self) { game in
                   GameCardView(game: game, namespace: namespace)
                     .onTapGesture {
-                      withAnimation(.spring(response: 0.3, dampingFraction: 1)) {
+                      withAnimation(.spring(response: 0.2, dampingFraction: 1)) {
                         viewModel.didtapOn(game)
                       }
                     }

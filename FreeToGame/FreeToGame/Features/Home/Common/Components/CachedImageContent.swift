@@ -25,7 +25,6 @@ struct CachedImageContent: View {
         image
           .resizable()
           .scaledToFill()
-          .matchedGeometryEffect(id: imageId, in: namespace)
       default:
         Color.red.opacity(0.6)
       }

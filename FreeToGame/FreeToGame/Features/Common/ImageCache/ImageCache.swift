@@ -33,8 +33,7 @@ struct CachedImage<Content>: View where Content: View {
   
   private func cachedRender(_ phase: AsyncImagePhase) -> Content {
     if case .success(let img) = phase,
-       let url = url
-    {
+       let url = url {
       ImageCache.shared[url] = img
     }
     return content(phase)

@@ -22,8 +22,7 @@ final class GameDetailViewModel {
   
   var isShowRequirements: Bool = false
   var isShowAditionalInfo: Bool = false
-  
-  private var isLoadedData: Bool = false
+  var isLoadedData: Bool = false
   
   //MARK: Init
   
@@ -53,10 +52,10 @@ final class GameDetailViewModel {
   
   @MainActor
   func fethGameDetail() async {
+    isLoadedData = false
     do {
       let gameDetail = try await client.fetchDetail(by: game.id)
       self.gameDetail = gameDetail
-    //  imageUrl = URL(string: gameDetail.thumbnail)
       aboutGame = "About \(gameDetail.title)"
       debugPrint("Screenshoots", gameDetail.screenshots)
     } catch {

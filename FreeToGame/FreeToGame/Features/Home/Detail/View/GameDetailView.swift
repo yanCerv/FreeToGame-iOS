@@ -13,15 +13,15 @@ struct GameDetailView: View {
   
   var body: some View {
     VStack {
-        NavigationButton(imageName: "xmark.circle.fill", action: {
-          withAnimation(.spring(response: 0.3, dampingFraction: 0.9)) {
-            viewModel.didTapCloseView()
-          }
-        })
-        .frame(maxWidth: .infinity, alignment: .trailing)
-        .padding(.horizontal, 20)
-        .padding(.top, 10)
-
+      NavigationButton(imageName: "xmark.circle.fill", action: {
+        withAnimation(.spring(response: 0.2, dampingFraction: 1)) {
+          viewModel.didTapCloseView()
+        }
+      })
+      .frame(maxWidth: .infinity, alignment: .trailing)
+      .padding(.horizontal, 20)
+      .padding(.top, 10)
+      
       ScrollView {
         VStack {
           CachedImage(url: viewModel.imageUrl) { phase in
@@ -30,44 +30,45 @@ struct GameDetailView: View {
               image
                 .resizable()
                 .scaledToFill()
-                .matchedGeometryEffect(id: viewModel.game.id, in: viewModel.namespace)
             default:
               Color.red.opacity(0.2)
             }
           }
           .frame(maxWidth: .infinity, maxHeight: 300)
           
-          HStack {
-            Button {
-              viewModel.didTapShowRequirements()
-            } label: {
-              Text("SO Requirements")
+          if viewModel.isLoadedData {
+            HStack {
+              Button {
+                viewModel.didTapShowRequirements()
+              } label: {
+                Text("SO Requirements")
+              }
+              .buttonStyle(DetailCorneredButtonStyle())
+              .frame(maxWidth: .infinity, alignment: .leading)
+              .padding(.horizontal, 16)
+              
+              Button {
+                viewModel.didTapShowAditionalInfo()
+              } label: {
+                Text("Additional Information")
+              }
+              .buttonStyle(DetailCorneredButtonStyle())
+              .frame(maxWidth: .infinity ,alignment: .trailing)
+              .padding(.horizontal, 16)
             }
-            .buttonStyle(DetailCorneredButtonStyle())
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 16)
-
-            Button {
-              viewModel.didTapShowAditionalInfo()
-            } label: {
-              Text("Additional Information")
-            }
-            .buttonStyle(DetailCorneredButtonStyle())
-            .frame(maxWidth: .infinity ,alignment: .trailing)
-            .padding(.horizontal, 16)
+            
+            DetailDescriptionView(aboutGame: viewModel.aboutGame,
+                                  welcomeDescription: viewModel.gameDetail.welcomeDescription)
+            
+            DetailScreenShootsView(gameDetails: viewModel.gameDetail)
+              .padding(.horizontal, 16)
           }
-          
-          DetailDescriptionView(aboutGame: viewModel.aboutGame,
-                                welcomeDescription: viewModel.gameDetail.welcomeDescription)
-    
-          DetailScreenShootsView(gameDetails: viewModel.gameDetail)
-            .padding(.horizontal, 16)
-          
         }
       }
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(Color.black.edgesIgnoringSafeArea(.all))
+    .matchedGeometryEffect(id: viewModel.game.id, in: viewModel.namespace)
     .sheet(isPresented: $viewModel.isShowRequirements) {
       DetailRequirementsView(requirements: viewModel.gameDetail.requirements)
         .presentationDetents([.fraction(0.4)])
@@ -80,6 +81,17 @@ struct GameDetailView: View {
     }
     .task {
       await viewModel.fethGameDetail()
+    }
+    .onAppear {
+      // Delay content display until animation completes (~0.5s)
+      DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+        withAnimation {
+          viewModel.isLoadedData = true
+        }
+      }
+    }
+    .onDisappear {
+      viewModel.isLoadedData = false
     }
   }
 }

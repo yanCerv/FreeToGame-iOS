@@ -23,6 +23,7 @@ struct GameCardView: View {
         .padding(8)
     }
     .background(Color.gray.opacity(0.5))
+    .matchedGeometryEffect(id: game.id, in: namespace)
     .frame(width: 200)
     .cornerRadius(8)
   }
