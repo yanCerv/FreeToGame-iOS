@@ -13,7 +13,6 @@ final class GameDetailViewModel {
   private let client: DetailClientProvider
   
   private(set) var game: Game
-  private(set) var namespace: Namespace.ID
   private(set) var isPresented: Binding<Bool>
   
   private(set) var gameDetail: GameDetail = GameDetail.emptyObject()
@@ -27,9 +26,8 @@ final class GameDetailViewModel {
   //MARK: Init
   
   @MainActor
-  init(game: Game, namespace: Namespace.ID, isPresented: Binding<Bool>, client: DetailClientProvider = DetailClient()) {
+  init(game: Game, isPresented: Binding<Bool>, client: DetailClientProvider = DetailClient()) {
     self.game = game
-    self.namespace = namespace
     self._isPresented = isPresented
     self.client = client
     imageUrl = URL(string: game.thumbnail)

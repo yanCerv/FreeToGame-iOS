@@ -68,7 +68,6 @@ struct GameDetailView: View {
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
     .background(Color.black.edgesIgnoringSafeArea(.all))
-    .matchedGeometryEffect(id: viewModel.game.id, in: viewModel.namespace)
     .sheet(isPresented: $viewModel.isShowRequirements) {
       DetailRequirementsView(requirements: viewModel.gameDetail.requirements)
         .presentationDetents([.fraction(0.4)])
@@ -83,8 +82,8 @@ struct GameDetailView: View {
       await viewModel.fethGameDetail()
     }
     .onAppear {
-      // Delay content display until animation completes (~0.5s)
-      DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+      Task {
+        try? await Task.sleep(nanoseconds: 600_000_000)
         withAnimation {
           viewModel.isLoadedData = true
         }
@@ -93,5 +92,6 @@ struct GameDetailView: View {
     .onDisappear {
       viewModel.isLoadedData = false
     }
+    .toolbarVisibility(viewModel.isLoadedData ? .hidden : .visible, for: .navigationBar)
   }
 }

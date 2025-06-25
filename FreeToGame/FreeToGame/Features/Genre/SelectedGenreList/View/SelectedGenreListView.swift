@@ -19,9 +19,10 @@ struct SelectedGenreListView: View {
       ScrollView {
         LazyVGrid(columns: viewModel.columns, spacing: 6) {
           ForEach(viewModel.games, id: \.self) { game in
-            GridGameCardView(game: game, namespace: namespace)
+            GridGameCardView(game: game)
+              .matchedGeometryEffect(id: game.id, in: namespace)
               .onTapGesture {
-                withAnimation(.spring(response: 0.3, dampingFraction: 0.9)) {
+                withAnimation(.spring(response: 0.3, dampingFraction: 1)) {
                   viewModel.didtapOn(game)
                 }
               }
@@ -38,10 +39,9 @@ struct SelectedGenreListView: View {
       if let gameSelected = viewModel.gameSelected,
          viewModel.isShowDetail {
         GameDetailView(viewModel: GameDetailViewModel(game: gameSelected,
-                                                      namespace: namespace,
                                                       isPresented: $viewModel.isShowDetail))
         .zIndex(1)
-        .toolbar(.hidden, for: .navigationBar)
+        .matchedGeometryEffect(id: gameSelected.id, in: namespace)
       }
     }
     .alert(viewModel.alertMessage, isPresented: $viewModel.showAlert) {

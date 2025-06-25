@@ -42,25 +42,24 @@ struct HomeView: View {
       .refreshable {
         await viewModel.fetchGames()
       }
-      .overlay {
-        if let gameSelected = viewModel.gameSelected,
-           viewModel.isShowDetail {
-          ZStack {
-            Color.black.opacity(0.5)
-              .ignoresSafeArea()
-              .transition(.opacity)
-            
-            GameDetailView(viewModel: GameDetailViewModel(game: gameSelected,
-                                                          namespace: namespace,
-                                                          isPresented: $viewModel.isShowDetail))
-          }
-          .toolbar(.hidden, for: .navigationBar)
-          .zIndex(1)
+    }
+    .overlay {
+      if let gameSelected = viewModel.gameSelected,
+         viewModel.isShowDetail {
+        ZStack {
+          Color.black.opacity(0.5)
+            .ignoresSafeArea()
+            .transition(.opacity)
+          
+          GameDetailView(viewModel: GameDetailViewModel(game: gameSelected,
+                                                        isPresented: $viewModel.isShowDetail))
+          .matchedGeometryEffect(id: gameSelected.id, in: namespace)
         }
+        .toolbar(.hidden, for: .navigationBar)
       }
-      .task {
-        await viewModel.fetchGames()
-      }
+    }
+    .task {
+      await viewModel.fetchGames()
     }
   }
 }

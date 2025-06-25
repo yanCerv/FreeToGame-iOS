@@ -9,7 +9,6 @@ import SwiftUI
 
 struct GridGameCardView: View {
   let game: Game
-  var namespace: Namespace.ID
 
   var body: some View {
     VStack(alignment: .leading, spacing: 16) {
@@ -19,7 +18,6 @@ struct GridGameCardView: View {
           image
             .resizable()
             .scaledToFill()
-            .matchedGeometryEffect(id: "grid\(game.id)", in: namespace)
         default:
           Color.red.opacity(0.6)
         }
