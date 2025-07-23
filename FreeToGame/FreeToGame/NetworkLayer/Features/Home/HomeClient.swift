@@ -37,12 +37,8 @@ final class HomeClient: Request, HomeClientProvider, AssistErrorMessage {
         if let error = self.error(completion) {
           continuation.resume(throwing: error)
         }
-      } receiveValue: { data in
-        if data.isEmpty {
-          continuation.resume(throwing: ErrorHandler.error(message: "No Games Found", statusCode: 1))
-        } else {
-          continuation.resume(returning: data)
-        }
+      } receiveValue: { _ in
+        continuation.resume(returning: [])
       }.store(in: &anyCancellables)
     }
   }
@@ -61,35 +57,5 @@ final class HomeClient: Request, HomeClientProvider, AssistErrorMessage {
     } catch {
       return []
     }
-  }
-}
-
-// Actor Client
-
-actor HomeClientActor {
-  static let shared: HomeClientActor = HomeClientActor()
-  
-  private let requestActor: RequestActor
-  private var serviceType: ServiceType
-  
-  init(_ requestActor: RequestActor = .shared, serviceType: ServiceType = .service) {
-    self.requestActor = requestActor
-    self.serviceType = serviceType
-  }
-  
-  func fetchDataGames() async throws -> [Game] {
-    if serviceType == .mock {
-      return mockGames()
-    } else {
-      let configuration = HomeClientResources.getGames.config
-      return try await requestActor.request(configuration)
-    }
-  }
-  
-  private func mockGames() -> [Game] {
-    if let response = try? JsonResource.getFrom("GamesResponse", type: [Game].self) {
-      return response
-    }
-    return []
   }
 }

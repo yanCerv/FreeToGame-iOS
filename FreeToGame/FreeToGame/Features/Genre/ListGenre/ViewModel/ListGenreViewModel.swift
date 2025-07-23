@@ -43,7 +43,7 @@ final class ListGenreViewModel: ShowErrorProtocol {
   
   private func configListGenre(_ games: [Game]) -> [String] {
     let categories: Set<String> = Set(games.map { $0.genre.trimmingCharacters(in: .whitespacesAndNewlines) })
-    let sorted = Array(categories).sorted(by: { $0 < $1 })
-    return sorted
+    let listCategories = Array(categories)
+    return listCategories
   }
 }

@@ -10,7 +10,6 @@ import SwiftUI
 @Observable
 final class HomeViewModel {
   
-  private let clientActor: HomeClientActor
   private let client: HomeClientProvider
   
   private(set) var loaderState: LoaderState = .finishLoading
@@ -27,9 +26,8 @@ final class HomeViewModel {
   //MARK: - Init
   
   @MainActor
-  init(_ client: HomeClientProvider = HomeClient(), clientActor: HomeClientActor = .shared) {
+  init(_ client: HomeClientProvider = HomeClient()) {
     self.client = client
-    self.clientActor = clientActor
   }
   
   //MARK: - Methods
@@ -44,11 +42,9 @@ final class HomeViewModel {
     guard !isLoadedData else { return }
     loaderState = .startLoading
     do {
-   //   let games = try await clientActor.fetchDataGames()
       let games = try await client.fetchDataGames()
       categoryGames = configGamesCategory(games)
     } catch {
-    //  errorMessage = handled(error)
       showErrorAlert = true
     }
     isLoadedData = true

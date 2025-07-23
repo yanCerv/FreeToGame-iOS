@@ -36,13 +36,12 @@ struct GameDetail: Decodable {
     case developer = "developer"
     case releaseDate = "release_date"
     case freetogameProfileURL = "freetogame_profile_url"
-    case minimumSystemRequirements = "minimum_system_requirements"
+    case minimumSystemRequirements = "minimum_system_requirement"
     case screenshots = "screenshots"
   }
   
   var requirements: MinimumSystemRequirements {
-    guard let minimumSystemRequirements else { return MinimumSystemRequirements.empty()}
-    return minimumSystemRequirements
+    return minimumSystemRequirements!
   }
   
   static func emptyObject() -> GameDetail {
