@@ -9,8 +9,8 @@ iOS client for the FreeToGame API that displays a list of free-to-play games and
 - **MVVM Architecture**  
   Clear separation between Model, View, and ViewModel to keep code clean and maintainable.
 
-- **Network Layer with URLSession and Swift Concurrency**  
-  - All HTTP calls are made with `URLSession` in combination with `async/await`.  
+- **Network Layer with URLSession With Combine and Swift Concurrency**  
+  - All HTTPS calls are made with `URLSession` in combination with `async/await`.  
   - `HomeClient` and other providers use a `Request` protocol to abstract networking logic.  
   - Centralized error handling with `ErrorHandler` and an `actor` that provides in-memory image caching.
 
@@ -23,6 +23,6 @@ iOS client for the FreeToGame API that displays a list of free-to-play games and
 
 - **Screens and Flow**  
   - **MainTabView**: Main container with a `TabView` and navigation (`NavigationStack`).  
-  - **HomeView**: List of sections (Trending, Most Played, New Releases, Community Recommendations), each with horizontal scrolling.  
+  - **HomeView**: List of sections (Trending, Most Played, New Releases, And Random Recommendations), each with horizontal scrolling.  
   - **SelectedGenreListView**: 2-column grid showing games for a selected genre.  
   - **GameDetailView**: Detail view with an expanded image (using `matchedGeometryEffect`), description, screenshots, and minimum system requirements shown in a sheet.  
