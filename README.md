@@ -8,6 +8,7 @@ iOS client for the FreeToGame API that displays a list of free-to-play games and
 
 - **MVVM Architecture**  
   Clear separation between Model, View, and ViewModel to keep code clean and maintainable.
+  Separation NetworkLayer to provide services for testing and consume.
 
 - **Network Layer with URLSession With Combine and Swift Concurrency**  
   - All HTTPS calls are made with `URLSession` using Combine with `async/await` Workaround client.  
