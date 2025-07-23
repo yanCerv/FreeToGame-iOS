@@ -14,20 +14,17 @@ struct ContentView<T: View>: View {
   
   var body: some View {
     
-    switch loaderState {
-    case .startLoading:
-      ZStack {
-        LinearGradient(colors: [.black, .gray], startPoint: .top, endPoint: .bottom)
-          .ignoresSafeArea()
+    ZStack {
+      LinearGradient(colors: [.black, .gray], startPoint: .top, endPoint: .bottom)
+        .ignoresSafeArea()
+      
+      switch loaderState {
+      case .startLoading:
         LoaderView()
           .toolbar(.hidden, for: .navigationBar)
           .toolbar(.hidden, for: .tabBar)
           .tint(.white)
-      }
-    case .finishLoading:
-      ZStack {
-        LinearGradient(colors: [.black, .gray], startPoint: .top, endPoint: .bottom)
-          .ignoresSafeArea()
+      case .finishLoading:
         content
           .navigationBarTitleDisplayMode(.inline)
           .navigationBarBackButtonHidden(true)
