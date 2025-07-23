@@ -13,7 +13,7 @@ struct GenreCardView: View {
   
   var body: some View {
     Button {
-      navigation.add(.listSelecte(genre: genre))
+      navigation.add(.selected(genre: genre))
     } label: {
       VStack {
         HStack {

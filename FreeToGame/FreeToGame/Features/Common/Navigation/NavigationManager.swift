@@ -10,7 +10,7 @@ import SwiftUI
 enum NavigationPath: Hashable {
   case search
   case description
-  case listSelecte(genre: String)
+  case selected(genre: String)
 }
 
 

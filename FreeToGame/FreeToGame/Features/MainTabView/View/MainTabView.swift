@@ -37,7 +37,7 @@ struct MainTabView: View {
           Text("search view")
         case .description:
           Text("description view")
-        case .listSelecte(let genre):
+        case .selected(let genre):
           SelectedGenreListView(viewModel: SelectedGenreListViewModel(genre: genre))
         }
       }
