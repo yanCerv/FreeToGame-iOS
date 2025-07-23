@@ -10,7 +10,7 @@ iOS client for the FreeToGame API that displays a list of free-to-play games and
   Clear separation between Model, View, and ViewModel to keep code clean and maintainable.
 
 - **Network Layer with URLSession With Combine and Swift Concurrency**  
-  - All HTTPS calls are made with `URLSession` in combination with `async/await`.  
+  - All HTTPS calls are made with `URLSession` using Combine with `async/await` Workaround client.  
   - `HomeClient` and other providers use a `Request` protocol to abstract networking logic.  
   - Centralized error handling with `ErrorHandler` and an `actor` that provides in-memory image caching.
 
